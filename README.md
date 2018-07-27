@@ -11,7 +11,7 @@ Griffin Group Global employs several technologies to create a microservice based
 [Nodejs][nodejs] on the backend in our [docker][docker] based microservices. Our UX currently targets the IOS platform
 but as we expand we will move to android based UXs and responsive web applications. 
 
-Our challenge is to create a web based UI and backend API that reads and stores contact information. The web frontend/server must be a separate process/service fromt he backend api. In other words, decouple the UI from the data service.
+Our challenge is to create a web based UI and backend API that reads and stores contact information. The web frontend/server must be a separate process/service from the backend api. In other words, decouple the UI from the data service.
 
 ## Minimum Challenge Requirements
 We would like a minimum  capability. These are:
