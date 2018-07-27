@@ -13,6 +13,8 @@ but as we expand we will move to android based UXs and responsive web applicatio
 
 Our challenge is to create a web based UI and backend API that reads and stores contact information. The web frontend/server must be a separate process/service from the backend api. In other words, decouple the UI from the data service.
 
+Ideally, this would take a mid-level developer up to two hours to complete the minimum requirements.
+
 ## Minimum Challenge Requirements
 We would like a minimum  capability. These are:
 - A RESTful create and read mechanism for contacts
