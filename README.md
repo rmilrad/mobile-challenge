@@ -11,19 +11,11 @@ Griffin Group Global employs several technologies to create a microservice based
 [Nodejs][nodejs] on the backend in our [docker][docker] based microservices. Our UX currently targets the IOS platform
 but as we expand we will move to android based UXs and responsive web applications. 
 
-Our challenge is to create a web based UI that allows a web UI user to communicate with a non web UI user. The web ui should
-allow the web user to Create and Read individual contacts where the contact name and method of communication are stored.
-The web UI should allow the web user to communicate with a contact using conversations where a conversation is a
-communication chain centered around a subject. The contact should be able to respond on the communication chain and that
-message should appear in the correct conversation.
+Our challenge is to create a web based UI and backend API that reads and stores contact information. The web frontend/server must be a separate process/service fromt he backend api. In other words, decouple the UI from the data service.
 
 ## Minimum Challenge Requirements
 We would like a minimum  capability. These are:
 - A RESTful create and read mechanism for contacts
-- A RESTful create and read mechanism for conversations.
-- Contacts and Conversation shall be their own independent services (microservice).
-- a Web UI that allows a user to send messages in a conversation to contact, using the contacts preferred communication 
-method.
 
 The basic format for the RESTful route would conform to:
 
