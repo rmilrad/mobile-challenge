@@ -34,17 +34,18 @@ where:
 - `value` denotes the value to query for
 - `…` denotes that there can be any number of query parameters
 
-The communication method that is used to communicate with the contact is of your choosing. We would suggest using email
-and setting headers to align the communication with conversations, but that is up to you.
 
 ## Where to concentrate your effort
-In a microservices application, there are many areas that need to be developed. While implementing the minimum requirements, please feel to implement one or more items in these areas. Please do not feel limited to these areas if you would like to add your take on microservice development.
+In a microservices application, there are many areas that need to be developed. Working software is always top priority, however, so meet the minimum requirements. Should you want to go above and beyond the minimum requirements, please feel free to add to your submittal either via code or via documentation in [common mark][commonmark] compliant documentation.
 
+Suggestions for items that could be expanded upon:
+- search routes with searching on specific paramters
 - Error handling
   - Which HTTP Codes should be returned and under which circumstances?
   - Should the user of the API get more information than an HTTP status code?
   - Do integration tests reflect these error conditions?
   - etc.
+- wrapping your service(s) in docker containers
 - Debug statements
 - [TDD]
 - Service security
