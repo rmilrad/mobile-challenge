@@ -14,7 +14,7 @@ Choice of UI/UX is up to the candidate's discretion. Feel free to go into detail
 
 Ref: User API Documentation [here](./user.md)
 
-## Minimum Challenge Requirements
+## Requirements
 We would like a minimum capability. These are:
 - Get it to work with bare minimum UI and backend integration. 
 - The code must execute. 
