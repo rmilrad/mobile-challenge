@@ -34,18 +34,18 @@ challenge. Spending significant amounts of time ensuring production level qualit
 we would like to see your architectural choices and approach to coding over production ready, visually
 appealing features.
 
-# Prerequisites
+## Prerequisites
 1. A basic understanding of source code control, [git][git-scm] is required.
 2. You must make your code available via a [GitHub][github] account.
 3. You should be familiar with consuming data APIs.
 
-# Getting Started
+## Getting Started
 1. Fork this [repository][repository].
 1. Clone the fork to your local machine.
 1. Start coding.
 1. Commit changes to your fork as you see fit.
 
-# Submission
+## Submission
 
 When you are comfortable with your results, please email your fork to
 [support@estatespace.com](mailto:support@estatespace.com). Please keep your emails short and to the point.
@@ -55,7 +55,7 @@ Any specific notes or further information you would like to add about your submi
 Do not feel as though you must create a public fork of this repository. You are free to create a throwaway GitHub account or private fork.
 In those cases, please let us know so that we may send you the GitHub IDs to add to the repository.
 
-# Evaluations
+## Evaluations
 
 We realize there are many items to look at when creating an application.
 Please do not feel like like you have to do everything.
@@ -70,7 +70,7 @@ We look for creativity, originality, and a good user experience in your applicat
 
 We look for readability, good architectural decisions, modularity, and a solid approach to testing in your code.
 
-# License
+### License
 This project is [MIT licensed][mitlicense].
 
 [g3website]:https://www.griffingroupglobal.com
