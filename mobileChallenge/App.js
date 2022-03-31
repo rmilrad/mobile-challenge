@@ -4,9 +4,12 @@ import {
   SafeAreaView,
   ScrollView,
   StatusBar,
+  ItemSeparatorComponent,
+  ItemSeperatorView,
   FlatList,
   StyleSheet,
   Text,
+  TextInput,
   useColorScheme,
   View,
 } from 'react-native';
@@ -19,64 +22,85 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-const URL = "https://my.api.mockaroo.com/users.json?page=1&count=40&key=930279b0";
+const URL = "http://universities.hipolabs.com/search?country=United+States";
 // get data from this URL!
 
 const App = () => {
 
-  const [isLoading, setLoading] = useState(true);
-  const [data, setData] = useState([]);
+  const [masterData, setmasterData] = useState([]);
+  const [filteredData, setfilteredData] = useState([]);
+  const [search, setsearch] = useState('');
 
-  // similar to 'componentDidMount', gets called once
   useEffect(() => {
-    fetch(URL)
-      .then((response) => response.json()) // get response, convert to json
-      .then((json) => {
-        setData(json.entries);
-      })
-      .catch((error) => alert(error)) // display errors
-      .finally(() => setLoading(false)); // change loading state
-  }, []);
-  // similar to 'componentDidMount', gets called once
+    fetchPosts();
+    return () => {
 
-  async function getMoviesAsync() {
-    try {
-      let response = await fetch(URL);
-      let json = await response.json();
-      setData(json.data);
-      setLoading(false);
-    } catch (error) {
-      alert(error);
+    }
+  }, []);
+
+  const fetchPosts = () => {
+    fetch(URL)
+    .then((response) => response.json())
+    .then((responseJson) => {
+      setfilteredData(responseJson);
+      setmasterData(responseJson);
+    }).catch((error) => {
+      console.error(error);
+    });
+  }
+
+  const searchFilter = (text) => {
+    if (text) {
+      const newData = masterData.filter((item) => {
+        const itemData = item.name ? item.name.toUpperCase() : ''.toUpperCase();
+        const textData = text.toUpperCase();
+        return itemData.indexOf(textData) > -1;
+      })
+      setfilteredData(newData);
+      setsearch(text);
+    } else {
+      setfilteredData(masterData);
+      setsearch(text);
     }
   }
- 
+
+  const ItemView = ({item}) => {
+    return (
+      <View>
+        <Text style={styles.description}>
+          {item.name}{'. '}{item.country.toUpperCase()}
+        </Text>
+      </View>
+    )
+  }
+
+  const ItemSeperatorView = () => {
+    return (
+      <View 
+        style={{height: 1, width: '100%', backgroundColor: '#c8c8c8'}}
+      >
+      </View>
+    )
+  }
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* While fetching show the indicator, else show response*/}
-      {isLoading ? (
-        <Text>Loading...</Text>
-      ) : (
-        <View>
-          {/* Display each movie */}
-          <View style={styles.cardBackground}></View>
-          <FlatList
-            data={data}
-            keyExtractor={({ id }, index) => id}
-            renderItem={({ item }) => (
-              <View style={styles.listItem}>
-                <Text style={styles.nameText}>
-                  {item.name.firstName} {item.name.lastName}
-                </Text>
-                <Text>
-                  {item.email}
-                </Text>
-              </View>
-            )}
-          />
-        </View>
-      )}
-
+      <View style={styles.cardView}>
+        {/* Display each item */}
+        <TextInput
+          style={styles.textInputStyle}
+          value={search}
+          placeholder='Enter university name to search'
+          underlineColorAndroid='transparent'
+          onChangeText={(text) => searchFilter(text)}
+        />
+        <FlatList
+          data={filteredData}
+          keyExtractor={({ id }, index) => id}
+          ItemSeparatorComponent={ItemSeperatorView}
+          renderItem={ItemView}
+        />
+      </View>
     </SafeAreaView>
   );
 };
@@ -90,6 +114,14 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: '600',
   },
+  textInputStyle: {
+    height: 40,
+    borderWidth: 1,
+    paddingLeft: 20,
+    margin: 5,
+    borderColor: '#009688',
+    backgroundColor: "white"
+  },
   sectionDescription: {
     marginTop: 8,
     fontSize: 18,
@@ -101,16 +133,25 @@ const styles = StyleSheet.create({
   listItem: {
     margin: 5,
     padding: 10,
-    marginLeft: 30
+  },
+  description: {
+    color: "black",
+    padding: 10
   },
   nameText: {
     fontSize: 20,
     fontWeight: '600',
+    color: "black"
   },
-  cardBackground: {
-    borderBottomWidth: 10, 
-    marginBottom: 12
+  cardBackground: { 
+    backgroundColor: "#CCCCE5",
+    borderRadius: 10,
+    marginRight: 15,
+    marginLeft: 15
   }, 
+  cardView: {
+    marginTop: 10
+  }
 });
 
 export default App;
