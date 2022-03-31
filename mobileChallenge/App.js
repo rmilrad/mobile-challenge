@@ -23,10 +23,10 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 const URL = "http://universities.hipolabs.com/search?country=United+States";
-// get data from this URL!
 
 const App = () => {
 
+  {/* Define and initialize variables */}
   const [masterData, setmasterData] = useState([]);
   const [filteredData, setfilteredData] = useState([]);
   const [search, setsearch] = useState('');
@@ -34,10 +34,10 @@ const App = () => {
   useEffect(() => {
     fetchPosts();
     return () => {
-
     }
   }, []);
 
+  {/* Fetch from API endpoint, save internally as JSON */}
   const fetchPosts = () => {
     fetch(URL)
     .then((response) => response.json())
@@ -49,6 +49,7 @@ const App = () => {
     });
   }
 
+  {/* Search filter for items in FlatList. If no school name is typed, return all results */}
   const searchFilter = (text) => {
     if (text) {
       const newData = masterData.filter((item) => {
@@ -64,6 +65,7 @@ const App = () => {
     }
   }
 
+  {/* Display properties for each item in requested API call */}
   const ItemView = ({item}) => {
     return (
       <View>
@@ -74,6 +76,7 @@ const App = () => {
     )
   }
 
+  {/* Line separation between elements in FlatView */}
   const ItemSeperatorView = () => {
     return (
       <View 
@@ -86,15 +89,17 @@ const App = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.cardView}>
-        {/* Display each item */}
-        <TextInput
+        
+        {/* TextInput for user to search through list items */}
+        <TextInput 
           style={styles.textInputStyle}
           value={search}
           placeholder='Enter university name to search'
           underlineColorAndroid='transparent'
           onChangeText={(text) => searchFilter(text)}
         />
-        <FlatList
+        {/* FlatList for items requested from API */}
+        <FlatList 
           data={filteredData}
           keyExtractor={({ id }, index) => id}
           ItemSeparatorComponent={ItemSeperatorView}
@@ -105,6 +110,7 @@ const App = () => {
   );
 };
 
+// style sheet
 const styles = StyleSheet.create({
   sectionContainer: {
     marginTop: 32,
