@@ -19,7 +19,7 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-const URL = "https://my.api.mockaroo.com/users.json?page=1&count=4&key=930279b0";
+const URL = "https://my.api.mockaroo.com/users.json?page=1&count=40&key=930279b0";
 // get data from this URL!
 
 const App = () => {
@@ -56,17 +56,16 @@ const App = () => {
       {/* While fetching show the indicator, else show response*/}
       {isLoading ? (
         <Text>Loading...</Text>
-        
       ) : (
         <View>
           {/* Display each movie */}
-          <View style={{ borderBottomWidth: 1, marginBottom: 12 }}></View>
+          <View style={{ borderBottomWidth: 10, marginBottom: 12 }}></View>
           <FlatList
             data={data}
             keyExtractor={({ id }, index) => id}
             renderItem={({ item }) => (
-              <View style={{ paddingBottom: 10 }}>
-                <Text style={styles.movieText}>
+              <View style={styles.listItem}>
+                <Text>
                   {item.email}
                 </Text>
               </View>
@@ -96,6 +95,10 @@ const styles = StyleSheet.create({
   highlight: {
     fontWeight: '700',
   },
+  listItem: {
+    margin: 10,
+    padding: 10
+  }
 });
 
 export default App;
