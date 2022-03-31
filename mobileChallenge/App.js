@@ -59,12 +59,15 @@ const App = () => {
       ) : (
         <View>
           {/* Display each movie */}
-          <View style={{ borderBottomWidth: 10, marginBottom: 12 }}></View>
+          <View style={styles.cardBackground}></View>
           <FlatList
             data={data}
             keyExtractor={({ id }, index) => id}
             renderItem={({ item }) => (
               <View style={styles.listItem}>
+                <Text style={styles.nameText}>
+                  {item.name.firstName} {item.name.lastName}
+                </Text>
                 <Text>
                   {item.email}
                 </Text>
@@ -96,9 +99,18 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
   listItem: {
-    margin: 10,
-    padding: 10
-  }
+    margin: 5,
+    padding: 10,
+    marginLeft: 30
+  },
+  nameText: {
+    fontSize: 20,
+    fontWeight: '600',
+  },
+  cardBackground: {
+    borderBottomWidth: 10, 
+    marginBottom: 12
+  }, 
 });
 
 export default App;
