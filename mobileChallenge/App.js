@@ -1,17 +1,10 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import type {Node} from 'react';
 import {
   SafeAreaView,
   ScrollView,
   StatusBar,
+  FlatList,
   StyleSheet,
   Text,
   useColorScheme,
@@ -26,66 +19,62 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-const Section = ({children, title}): Node => {
-  const isDarkMode = useColorScheme() === 'dark';
+const URL = "https://my.api.mockaroo.com/users.json?page=1&count=4&key=930279b0";
+// get data from this URL!
+
+const App = () => {
+
+  const [isLoading, setLoading] = useState(true);
+  const [data, setData] = useState([]);
+
+  // similar to 'componentDidMount', gets called once
+  useEffect(() => {
+    fetch(URL)
+      .then((response) => response.json()) // get response, convert to json
+      .then((json) => {
+        setData(json.entries);
+      })
+      .catch((error) => alert(error)) // display errors
+      .finally(() => setLoading(false)); // change loading state
+  }, []);
+  // similar to 'componentDidMount', gets called once
+
+  async function getMoviesAsync() {
+    try {
+      let response = await fetch(URL);
+      let json = await response.json();
+      setData(json.data);
+      setLoading(false);
+    } catch (error) {
+      alert(error);
+    }
+  }
+ 
+
   return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-};
-
-const App: () => Node = () => {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.js</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
+    <SafeAreaView style={styles.container}>
+      {/* While fetching show the indicator, else show response*/}
+      {isLoading ? (
+        <Text>Loading...</Text>
+        
+      ) : (
+        <View>
+          {/* Display each movie */}
+          <View style={{ borderBottomWidth: 1, marginBottom: 12 }}></View>
+          <FlatList
+            data={data}
+            keyExtractor={({ id }, index) => id}
+            renderItem={({ item }) => (
+              <View style={{ paddingBottom: 10 }}>
+                <Text style={styles.movieText}>
+                  {item.email}
+                </Text>
+              </View>
+            )}
+          />
         </View>
-      </ScrollView>
+      )}
+
     </SafeAreaView>
   );
 };
