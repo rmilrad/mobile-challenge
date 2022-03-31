@@ -21,5 +21,6 @@ I would first improve upon the requested API call, giving the user the ability t
 - clone the repo
 - cd mobileChallenge
 - run "npm start"
+- run "npm run android"
 
 Thank you and I look forward to hearing your feedback on my submission. 
